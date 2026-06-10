@@ -1,2 +1,0 @@
-#!/usr/bin/bash
-roslaunch pairs_uav_gazebo_simulation pairs_drone_spawner.launch custom_config:=/home/pairs/devel_workspace/src/pairs_uav_gazebo_simulation/ros_packages/pairs_uav_gazebo_simulation/config/spawner_custom_config.yaml
