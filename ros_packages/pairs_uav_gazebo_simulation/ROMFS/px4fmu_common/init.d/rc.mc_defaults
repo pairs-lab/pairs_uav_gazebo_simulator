@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# Multicopter default parameters.
+#
+# NOTE: Script variables are declared/initialized/unset in the rcS script.
+#
+
+set VEHICLE_TYPE mc
+
+# MAV_TYPE_QUADROTOR 2
+param set-default MAV_TYPE 2
+
+if param compare IMU_GYRO_RATEMAX 400
+then
+	param set-default IMU_GYRO_RATEMAX 800
+fi
+
+param set-default NAV_ACC_RAD 2
+
+param set-default RTL_RETURN_ALT 30
+param set-default RTL_DESCEND_ALT 10
+
+param set-default PWM_MAIN_MAX 1950
+param set-default PWM_MAIN_MIN 1075
+param set-default PWM_MAIN_RATE 400
+
+param set-default GPS_UBX_DYNMODEL 6
+
+#RC control input to transmitter only (disabled joystick)
+param set-default COM_RC_IN_MODE 0
+#RC channels mapping (ATER)
+param set-default RC_MAP_ROLL 1
+param set-default RC_MAP_THROTTLE 2
+param set-default RC_MAP_PITCH 3
+param set-default RC_MAP_YAW 4
+#Switches
+param set-default RC_MAP_OFFB_SW 5
+param set-default RC_MAP_FLTMODE 6
+# MANUAL - ALTITUDE - POSITION
+param set-default COM_FLTMODE1 0
+param set-default COM_FLTMODE2 -1
+param set-default COM_FLTMODE3 -1
+param set-default COM_FLTMODE4 1
+param set-default COM_FLTMODE5 -1
+param set-default COM_FLTMODE6 2
+#
+# This is the gimbal pass mixer.
+#
+set MIXER_AUX pass
+
+set MIXER quad_x
+
+set PWM_OUT 1234
+
+set PWM_AUX_OUT 1234
