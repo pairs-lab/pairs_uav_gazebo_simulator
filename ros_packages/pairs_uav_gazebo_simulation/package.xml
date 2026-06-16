@@ -20,6 +20,7 @@
   <depend>pairs_gazebo_common_resources</depend>
   <depend>pairs_msgs</depend>
   <depend>pairs_uav_px4_api</depend>
+  <exec_depend>pairs_rqt_control</exec_depend>
   <depend>px4</depend>
   <depend>rospy</depend>
   <depend>std_msgs</depend>

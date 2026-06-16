@@ -86,6 +86,11 @@ tmux select-layout -t "$W_rviz" tiled
 tmux send-keys -t "$P" "$SETUP; "'waitForControl; roslaunch pairs_rviz_plugins rviz_interface.launch' Enter
 tmux select-layout -t "$W_rviz" tiled
 
+# ---------------- window: gui (rqt control panel) ----------------
+read W_gui P <<< "$(tmux new-window -t "$SESSION_NAME" -n "gui" -P -F '#{window_id} #{pane_id}')"
+tmux send-keys -t "$P" "$SETUP; "'waitForControl; roslaunch pairs_rqt_control control.launch' Enter
+tmux select-layout -t "$W_gui" tiled
+
 # ---------------- window: layout ----------------
 read W_layout P <<< "$(tmux new-window -t "$SESSION_NAME" -n "layout" -P -F '#{window_id} #{pane_id}')"
 tmux send-keys -t "$P" "$SETUP; "'waitForControl; sleep 3; ~/.i3/layout_manager.sh ./layout.json' Enter
