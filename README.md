@@ -71,9 +71,27 @@ the UAV is actually airborne.
   ```bash
   ros2 service call /uav1/control_manager/goto pairs_msgs/srv/Vec4 "{goal: [5.0, 0.0, 3.0, 0.0]}"   # x y z heading
   ```
-- **RViz tools**:
-  - **Plan path** — fly a smooth multi-waypoint trajectory (see below)
-  - **Control Tool** — click-drag a single goto in the 3D view
+- **RViz tools** — see [RViz control tools](#rviz-control-tools) below:
+  - **Control Tool** — select a drone and fly it with the keyboard
+  - **Plan path** — fly a smooth multi-waypoint trajectory
+  - **Custom Goal** — publish a clicked pose to a topic (a hook for your own nodes)
+
+### RViz control tools
+
+**Control Tool** — fly the UAV directly from RViz. Select it, then:
+
+1. **Click / drag a box over the drone** in the 3D view to select it (you can
+   select several drones at once).
+2. **Right-click the drone → `Takeoff` / `Land` / `Land Home`** to call that service.
+3. Press **`R`** for *remote mode*, then fly with the keyboard:
+   `w a s d` (or `h j k l`) move · `q`/`e` yaw · `r`/`f` up/down · `G` toggle
+   global frame · `R` exit. The current mode and keys are shown at the bottom of
+   the RViz window.
+
+**Custom Goal** — click + drag a pose (like *2D Nav Goal*) and publish it as a
+`geometry_msgs/PoseStamped` on the `goal` topic (topic/name editable in the tool's
+properties). Nothing in the sim subscribes to `goal` by default, so it does not
+move the drone on its own — it is a hook for your own node/planner to listen on.
 
 ### Plan path (waypoint trajectories)
 
