@@ -67,7 +67,7 @@ read W_takeoff P <<< "$(tmux new-window -t "$SESSION_NAME" -n "takeoff" -P -F '#
 tmux send-keys -t "$P" "$SETUP; "'waitForHw; roslaunch pairs_uav_autostart automatic_start.launch' Enter
 P=$(tmux split-window -t "$W_takeoff" -P -F '#{pane_id}')
 tmux select-layout -t "$W_takeoff" tiled
-tmux send-keys -t "$P" "$SETUP; "'waitForControl; rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard' Enter
+tmux send-keys -t "$P" "$SETUP; "'waitForControl; until rosservice call /$UAV_NAME/hw_api/arming 1 | grep -q "success: True"; do sleep 1; done; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard' Enter
 tmux select-layout -t "$W_takeoff" tiled
 
 # ---------------- window: goto ----------------

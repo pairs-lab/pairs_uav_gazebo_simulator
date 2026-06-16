@@ -90,13 +90,13 @@ tmux select-layout -t "$W_automatic_start" tiled
 
 # ---------------- window: takeoff ----------------
 read W_takeoff P <<< "$(tmux new-window -t "$SESSION_NAME" -n "takeoff" -P -F '#{window_id} #{pane_id}')"
-tmux send-keys -t "$P" "$SETUP; "'export UAV_NAME=uav1; waitForControl; rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard' Enter
+tmux send-keys -t "$P" "$SETUP; "'export UAV_NAME=uav1; waitForControl; until rosservice call /$UAV_NAME/hw_api/arming 1 | grep -q "success: True"; do sleep 1; done; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard' Enter
 P=$(tmux split-window -t "$W_takeoff" -P -F '#{pane_id}')
 tmux select-layout -t "$W_takeoff" tiled
-tmux send-keys -t "$P" "$SETUP; "'export UAV_NAME=uav2; waitForControl; rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard' Enter
+tmux send-keys -t "$P" "$SETUP; "'export UAV_NAME=uav2; waitForControl; until rosservice call /$UAV_NAME/hw_api/arming 1 | grep -q "success: True"; do sleep 1; done; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard' Enter
 P=$(tmux split-window -t "$W_takeoff" -P -F '#{pane_id}')
 tmux select-layout -t "$W_takeoff" tiled
-tmux send-keys -t "$P" "$SETUP; "'export UAV_NAME=uav3; waitForControl; rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard' Enter
+tmux send-keys -t "$P" "$SETUP; "'export UAV_NAME=uav3; waitForControl; until rosservice call /$UAV_NAME/hw_api/arming 1 | grep -q "success: True"; do sleep 1; done; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard' Enter
 tmux select-layout -t "$W_takeoff" tiled
 
 # ---------------- window: rviz ----------------
