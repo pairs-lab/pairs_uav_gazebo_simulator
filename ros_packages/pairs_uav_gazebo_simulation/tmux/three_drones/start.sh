@@ -33,7 +33,7 @@ read W_gazebo P <<< "$(tmux new-window -t "$SESSION_NAME" -n "gazebo" -P -F '#{w
 tmux send-keys -t "$P" "$SETUP; "'waitForRos; roslaunch pairs_uav_gazebo_simulation simulation.launch world_name:=grass_plane gui:=true' Enter
 P=$(tmux split-window -t "$W_gazebo" -P -F '#{pane_id}')
 tmux select-layout -t "$W_gazebo" tiled
-tmux send-keys -t "$P" "$SETUP; "'waitForGazebo; rosservice call /pairs_drone_spawner/spawn "1 2 3 --$UAV_TYPE --enable-rangefinder"' Enter
+tmux send-keys -t "$P" "$SETUP; "'waitForGazebo; waitForSpawn; rosservice call /pairs_drone_spawner/spawn "1 2 3 --$UAV_TYPE --enable-rangefinder"' Enter
 P=$(tmux split-window -t "$W_gazebo" -P -F '#{pane_id}')
 tmux select-layout -t "$W_gazebo" tiled
 tmux send-keys -t "$P" "$SETUP; "'export UAV_NAME=uav1; waitForControl; gz camera -c gzclient_camera -f $UAV_NAME; history -s gz camera -c gzclient_camera -f $UAV_NAME' Enter
